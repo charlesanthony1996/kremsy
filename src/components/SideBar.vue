@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="drawer" permanent width="230">
+    <v-navigation-drawer :model-value="drawer" width="230">
         <v-list nav>
             <!-- <v-list-item title="kremsy" prepend-icon="mdi-home-city">
 
@@ -15,6 +15,8 @@
 
             <v-list-item prepend-icon="mdi-message" title="Messages" to="/messages"></v-list-item>
 
+            <v-list-item prepend-icon="mdi-graph" title="Analytics" to="/analytics"></v-list-item>
+
             <template v-slot:append>
                 <v-divider></v-divider>
 
@@ -27,10 +29,12 @@
     </v-navigation-drawer>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
+import { defineProps } from 'vue';
 
-const drawer = ref(true)
+// const drawer = ref(true)
+defineProps({ drawer: Boolean })
 
 </script>
 

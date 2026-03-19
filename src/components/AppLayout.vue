@@ -1,8 +1,8 @@
 <template>
 <v-layout>
 
-    <ToolBar></ToolBar>
-    <SideBar></SideBar>
+    <ToolBar :drawer="drawer" @toggleDrawer="drawer = !drawer"></ToolBar>
+    <SideBar :drawer="drawer"></SideBar>
 
         <!-- <TopBar></TopBar> -->
 
@@ -23,6 +23,10 @@
 import SideBar from './SideBar.vue';
 import ToolBar from './ToolBar.vue';
 import TopBar from './TopBar2.vue';
+
+import { ref } from 'vue'
+
+const drawer = ref(true)
 
 </script>
 

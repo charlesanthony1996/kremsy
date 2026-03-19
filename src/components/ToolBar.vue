@@ -1,6 +1,6 @@
 <template>
     <v-app-bar flat>
-        <v-app-bar-nav-icon @click="drawer =!drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="$emit('toggleDrawer')"></v-app-bar-nav-icon>
 
         <v-toolbar-title>Kremsy</v-toolbar-title>
 
@@ -16,10 +16,10 @@
             </template>
 
             <v-list>
-                <v-list-item title="Profile" prepend-icon="mdi-account"></v-list-item>
-                <v-list-item title="Settings" prepend-icon="mdi-cog"></v-list-item>
+                <v-list-item title="Profile" prepend-icon="mdi-account" to="/profile"></v-list-item>
+                <v-list-item title="Settings" prepend-icon="mdi-cog" to="/settings"></v-list-item>
                 <v-divider></v-divider>
-                <v-list-item title="Logout" prepend-icon="mdi-logout"></v-list-item>
+                <v-list-item title="Logout" prepend-icon="mdi-logout" to="/logout"></v-list-item>
 
             </v-list>
 
@@ -30,10 +30,12 @@
 </template>
 
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref} from 'vue'
+import { defineEmits } from 'vue';
 
-const drawer = ref(true)
+// const drawer = ref(true)
+defineEmits(['toggleDrawer'])
 
 </script>
 
