@@ -2,7 +2,7 @@
     <v-app-bar flat>
         <v-app-bar-nav-icon @click="$emit('toggleDrawer')"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Kremsy</v-toolbar-title>
+        <v-toolbar-title>Prefog ML</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
