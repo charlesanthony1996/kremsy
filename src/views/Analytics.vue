@@ -1,20 +1,22 @@
 <template>
     <v-container fluid>
 
-        <!-- title -->
         <v-row>
             <v-col>
                 <h1 class="text-h4 font-weight-bold">Analytics</h1>
             </v-col>
         </v-row>
 
-        <!-- metric cards -->
+
          <v-row>
             <v-col cols="12" md="3">
                 <v-card>
                     <v-card-title>Model Accuracy</v-card-title>
                     <div class="text-h5">{{ metrics ? metrics.accuracy.toFixed(3) : 'Loading...' }}</div>
-                    <div class="text-green">+12%</div>
+                    <!-- <div class="text-green">+12%</div> -->
+                     <div :class="change !== null && change == 0 ? 'text-green' : 'text-red'">
+                        {{ change !== null ? `${change >= 0 ? '+' : ''}${change.toFixed(2)}%` : '...' }}
+                     </div>
                 </v-card>
             </v-col>
 
@@ -51,6 +53,8 @@ import { ref, onMounted } from 'vue'
 const metrics = ref<any>(null)
 const change = ref<number | null>()
 
+
+
 const SUPABASE_URL = "https://tmhwaeusylkfxplqyzxf.supabase.co"
 const SUPABASE_ANON_KEY = "sb_publishable_SjEXm8SksDhy8CurunJO-w_oej1v8qj"
 
@@ -74,9 +78,14 @@ onMounted(async () => {
 
         const data = await res.json()
 
-        console.log("Supabase data:", data)
-
         metrics.value = data[0]
+
+        if (data.length > 1) {
+            const latest = data[0].accuracy
+            const previous = data[1].accuracy
+
+            change.value = ((latest - previous) / previous) * 100
+        }
 
     } catch (err) {
         console.error(err)
