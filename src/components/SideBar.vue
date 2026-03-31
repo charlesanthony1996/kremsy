@@ -9,9 +9,9 @@
 
             <v-list-item prepend-icon="mdi-home" title="Home" to="/"></v-list-item>
 
-            <v-list-item prepend-icon="mdi-home-search" title="Rent" to="/rent"></v-list-item>
+            <!-- <v-list-item prepend-icon="mdi-home-search" title="Rent" to="/rent"></v-list-item> -->
 
-            <v-list-item prepend-icon="mdi-store" title="Marketplace" to="/marketplace"></v-list-item>
+            <!-- <v-list-item prepend-icon="mdi-store" title="Marketplace" to="/marketplace"></v-list-item> -->
 
             <v-list-item prepend-icon="mdi-message" title="Messages" to="/messages"></v-list-item>
 
