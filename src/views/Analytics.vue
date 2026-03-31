@@ -46,126 +46,42 @@
 </template>
 
 <script lang="ts" setup>
-
-const pages = [
-    {
-        name: "/getting-started/installation",
-        sessions: 12453,
-        change: "+24%",
-    },
-    {
-        name: "/getting-started/installation",
-        sessions: 12453,
-        change: "+24%",
-    },
-    {
-        name: "/getting-started/installation",
-        sessions: 12453,
-        change: "+24%",
-    }
-]
-
 import { ref, onMounted } from 'vue'
 
 const metrics = ref<any>(null)
-
-// onMounted(async() => {
-//     const res = await fetch("https://raw.githubusercontent.com/charlesanthony1996/just-a-little-foggy/main/metrics.json")
-//     metrics.value = await res.json()
-// })
-
-// onMounted(async () => {
-//   try {
-//     const res = await fetch("https://raw.githubusercontent.com/charlesanthony1996/just-a-little-foggy/main/metrics.json")
-
-//     if (!res.ok) {
-//       throw new Error("Failed to fetch metrics")
-//     }
-
-//     const data = await res.json()
-//     console.log("METRICS:", data)
-
-//     metrics.value = data
-//   } catch (err) {
-//     console.error("ERROR:", err)
-//   }
-// })
-
-// onMounted(async () => {
-//   try {
-//     const res = await fetch(
-//       "https://cdn.jsdelivr.net/gh/charlesanthony1996/just-a-little-foggy@main/metrics.json"
-//     )
-
-//     if (!res.ok) throw new Error("Fetch failed")
-
-//     const data = await res.json()
-//     metrics.value = data
-
-//     console.log("Loaded metrics:", data)
-//   } catch (err) {
-//     console.error(err)
-//   }
-// })
-
-// onMounted(async () => {
-//   try {
-//     const res = await fetch(
-//       "https://tmhwaeusylkfxplqyzxf.supabase.co/rest/v1/runs?select=*&order=created_at.desc&limit=1",
-//       {
-//         headers: {
-//           apikey: "YOUR_PUBLIC_ANON_KEY",
-//           Authorization: "Bearer YOUR_PUBLIC_ANON_KEY"
-//         }
-//       }
-//     )
-
-//     if (!res.ok) throw new Error("Fetch failed")
-
-//     const data = await res.json()
-
-//     console.log("Supabase data:", data)
-
-//     metrics.value = data[0]
-
-//   } catch (err) {
-//     console.error(err)
-//   }
-// })
+const change = ref<number | null>()
 
 const SUPABASE_URL = "https://tmhwaeusylkfxplqyzxf.supabase.co"
-// const SUPABASE_ANON_KEY = "YOUR_ANON_PUBLIC_KEY"
 const SUPABASE_ANON_KEY = "sb_publishable_SjEXm8SksDhy8CurunJO-w_oej1v8qj"
 
 onMounted(async () => {
-  try {
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/runs?select=*&order=created_at.desc&limit=1`,
-      {
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+    try {
+        const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/runs?select=*&order=created_at.desc&limit=2`,
+        {
+            headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+            }
         }
-      }
-    )
+        )
 
-    if (!res.ok) {
-      const text = await res.text()
-      console.error("Supabase error:", text)
-      throw new Error("Fetch failed")
+        if (!res.ok) {
+        const text = await res.text()
+        console.error("Supabase error:", text)
+        throw new Error("Fetch failed")
+        }
+
+        const data = await res.json()
+
+        console.log("Supabase data:", data)
+
+        metrics.value = data[0]
+
+    } catch (err) {
+        console.error(err)
     }
-
-    const data = await res.json()
-
-    console.log("Supabase data:", data)
-
-    metrics.value = data[0]
-
-  } catch (err) {
-    console.error(err)
-  }
-})
-
+    })
 </script>
 
 <style scoped>
